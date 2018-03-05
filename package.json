@@ -1,0 +1,21 @@
+{
+  "name": "quiz",
+  "version": "1.0.0",
+  "description": "Proyecto Quiz",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "quiz",
+    "core",
+    "node"
+  ],
+  "author": "Miguel Lozano Torrequebrada",
+  "license": "Unlicense",
+  "dependencies": {
+    "chalk": "^2.3.2",
+    "figlet": "^1.2.0"
+  }
+}
