@@ -47,7 +47,7 @@ exports.listCmd = rl =>{
 */
 const validateId = id => {
 	
-	return new Sequelize.Promise ((resolve, reject) => {
+	return new Sequelize.Promise ((resolve , reject) => {
 		if (typeof id === "undefined") {
 			reject(new Error (`Falta el parámetro <id>. `));
 		} else{
@@ -148,7 +148,7 @@ exports.testCmd = (rl, id) =>{
 	//obtener la pregunta como en edit
 	//comprobar que este bien
 	
-	validateId(id)
+	 validateId(id)
 	.then(id => models.quiz.findById(id))
 	.then(quiz => {
 		if (!quiz) {
@@ -156,7 +156,7 @@ exports.testCmd = (rl, id) =>{
 		}
 		return makeQuestion(rl,` ${quiz.question} ?`)
 		.then (a => {
-		  	if (quiz.answer == a){
+		  	if (quiz.answer.toLowerCase().trim() == a.toLowerCase().trim()){
 				log(`Su respuesta es:`);
 				log('Correcta', 'green');
 				
@@ -177,36 +177,6 @@ exports.testCmd = (rl, id) =>{
 	});
 };	
 
-
-
-
-	// if(typeof id === "undefined") {
-	// 	errorlog(`falta el valor del parámetro id.`);
-	// 	rl.prompt();
-	// }
-	// else{
-	// 	try{
-	// 	const quiz = model.getByIndex(id);
-				
-	// 		rl.question(` ${colorize(quiz.question, 'red')}${colorize('?', 'red')} `, resp => {
-	// 			if( resp.toLowerCase().trim() === quiz.answer.toLowerCase().trim() ){
-	// 				log(`Su respuesta es:`);
-	// 				log('Correcta', 'green');
-	// 				rl.prompt();
-	// 			}
-	// 			else{ 
-	// 				log(`Su respuesta es:`);
-	// 				log('Incorrecta', 'red');
-	// 				rl.prompt();
-	// 			}
-	// 		});
-		
-	// 	}catch (error){
-	// 		errorlog(error.message);
-	// 		rl.prompt();
-	// 	}
-	// }	
-//};
 
 /**
 *Pregunta los quizzes existentes en orden aleatorio.
