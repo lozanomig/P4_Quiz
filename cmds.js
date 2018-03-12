@@ -47,7 +47,7 @@ exports.listCmd = rl =>{
 */
 const validateId = id => {
 	
-	return new Sequelize.Promise ((resolve , reject) => {
+	return new Sequelize.Promise((resolve , reject) => {
 		if (typeof id === "undefined") {
 			reject(new Error (`Falta el parámetro <id>. `));
 		} else{
@@ -144,7 +144,7 @@ exports.addCmd = rl =>{
 *@param id Identificador del quiz a mostrar
 */
 exports.testCmd = (rl, id) =>{
-		
+		 
 	validateId(id)
 	.then(id => models.quiz.findById(id))
 	.then(quiz => {
