@@ -152,25 +152,24 @@ exports.testCmd = (rl, id) =>{
 			throw new Error(`No existe un quiz asociado al id: ${id}.`);
 		}
 		return makeQuestion(rl,` ${quiz.question} ?`)
-		.then (a => {
+		.then(a => {
 		  	if (quiz.answer.toLowerCase().trim() == a.toLowerCase().trim()){
 				log(`Su respuesta es:`);
 				log('Correcta', 'green');
 				
 			}else {
 				log(`Su respuesta es:`);
-				log('incorrecta', 'red');
+				log('Incorrecta', 'red');
 				
 			}
-
 		})
-		.catch(error => {
-		errorlog(error.message);
-		})
+	})	
+	.catch(error => {
+	errorlog(error.message);
+	})
 
-		.then(() => {
-			rl.prompt();
-		});
+	.then(() => {
+		rl.prompt();
 	});
 };	
 
