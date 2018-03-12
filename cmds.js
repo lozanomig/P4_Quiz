@@ -220,48 +220,48 @@ exports.playCmd = rl =>{
 
 
 
-	let id = 300;
-	n_preguntas = model.count();
-	let score = 0;
-	let toBeResolved = [];
-	for (i=0; i< model.count(); i++){  //para recorrer array metiendo id
-		toBeResolved[i] = i;
-	};
-	log(`${toBeResolved[0]} ${toBeResolved[1]} ${toBeResolved[2]} ${toBeResolved[3]}`);
-	const playOne = () => {
-	if(n_preguntas === 0){
-		log('No hay nada más que preguntar');
-		log('Fin del examen. Aciertos: ');
-		biglog(score, 'magenta')
-		rl.prompt();
-	}else{
-		let id_0 =Math.floor( Math.random() * n_preguntas);
+	// let id = 300;
+	// n_preguntas = model.count();
+	// let score = 0;
+	// let toBeResolved = [];
+	// for (i=0; i< model.count(); i++){  //para recorrer array metiendo id
+	// 	toBeResolved[i] = i;
+	// };
+	// log(`${toBeResolved[0]} ${toBeResolved[1]} ${toBeResolved[2]} ${toBeResolved[3]}`);
+	// const playOne = () => {
+	// if(n_preguntas === 0){
+	// 	log('No hay nada más que preguntar');
+	// 	log('Fin del examen. Aciertos: ');
+	// 	biglog(score, 'magenta')
+	// 	rl.prompt();
+	// }else{
+	// 	let id_0 =Math.floor( Math.random() * n_preguntas);
 		
-		do{
-		id = id_0;  //Cogemos un id al azar
-		let quiz = model.getByIndex(id); //Sacamos el quiz de dicho id
-		delete toBeResolved[id] //la quitamos del array
+	// 	do{
+	// 	id = id_0;  //Cogemos un id al azar
+	// 	let quiz = model.getByIndex(id); //Sacamos el quiz de dicho id
+	// 	delete toBeResolved[id] //la quitamos del array
 		
-		rl.question(` ${colorize(quiz.question, 'red')}${colorize('?', 'red')} `, resp => {
-			if( resp.toLowerCase().trim() === quiz.answer.toLowerCase().trim() ){
-				score++;
-				n_preguntas--;
-				log(`CORRECTO - Lleva  : ${score} aciertos` );
-				playOne();
-				}
+	// 	rl.question(` ${colorize(quiz.question, 'red')}${colorize('?', 'red')} `, resp => {
+	// 		if( resp.toLowerCase().trim() === quiz.answer.toLowerCase().trim() ){
+	// 			score++;
+	// 			n_preguntas--;
+	// 			log(`CORRECTO - Lleva  : ${score} aciertos` );
+	// 			playOne();
+	// 			}
 
-			else{ 
-				log('INCORRECTO ');
-				log('Fin del examen. Aciertos: ');
-				biglog(score, 'magenta');
-				rl.prompt();
-				}
-			});
+	// 		else{ 
+	// 			log('INCORRECTO ');
+	// 			log('Fin del examen. Aciertos: ');
+	// 			biglog(score, 'magenta');
+	// 			rl.prompt();
+	// 			}
+	// 		});
 
-		}while ( id_0 != id);
-		}
-	}
-	playOne();
+	// 	}while ( id_0 != id);
+	// 	}
+	// }
+	// playOne();
 };
 
 /**
