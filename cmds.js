@@ -237,7 +237,7 @@ exports.playCmd = rl =>{
 					log('Incorrecta', 'red');
 					log('Fin del examen. Aciertos: ');
 	 				log(score, 'magenta');
-	 				
+
 				}
 			})
 		//}
@@ -369,7 +369,7 @@ exports.editCmd = (rl, id) =>{
 exports.creditsCmd = rl =>{
 	log('Autores de la práctica.');
     log('Miguel Lozano Torrequebrada');
-    log('');
+    log('Carlos Gutierrez de la Azuela');
     rl.prompt();
 };
 
