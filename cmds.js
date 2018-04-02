@@ -176,32 +176,6 @@ exports.testCmd = (socket,rl, id) =>{
 
 
 
-	// if(typeof id === "undefined") {
-	// 	errorlog(`falta el valor del parámetro id.`);
-	// 	rl.prompt();
-	// }
-	// else{
-	// 	try{
-	// 	const quiz = model.getByIndex(id);
-				
-	// 		rl.question(` ${colorize(quiz.question, 'red')}${colorize('?', 'red')} `, resp => {
-	// 			if( resp.toLowerCase().trim() === quiz.answer.toLowerCase().trim() ){
-	// 				log(`Su respuesta es:`);
-	// 				biglog('Correcta', 'green');
-	// 				rl.prompt();
-	// 			}
-	// 			else{ 
-	// 				log(`Su respuesta es:`);
-	// 				biglog('Incorrecta', 'red');
-	// 				rl.prompt();
-	// 			}
-	// 		});
-		
-	// 	}catch (error){
-	// 		errorlog(error.message);
-	// 		rl.prompt();
-	// 	}
-	// }	
 };	
 
 
@@ -245,7 +219,7 @@ exports.playCmd = (socket,rl) =>{
 	})
 	
 	.catch(error => {
-		errorlog(socket,error.message);
+		errorlog(error.message);
 	})
 
 	.then(() => {
@@ -261,48 +235,6 @@ exports.playCmd = (socket,rl) =>{
 
 
 
-// 	let id = 300;
-// 	n_preguntas = sequelize.models.quiz.count();
-// 	let score = 0;
-// 	let toBeResolved = [];
-// 	for (i=0; i< n_preguntas; i++){  //para recorrer array metiendo id
-// 		toBeResolved[i] = i;
-// 	};
-// 	//log(`${toBeResolved[0]} ${toBeResolved[1]} ${toBeResolved[2]} ${toBeResolved[3]}`);
-// 	const playOne = () => {
-// 	if(n_preguntas === 0){
-// 		log('No hay nada más que preguntar');
-// 		log('Fin del examen. Aciertos: ');
-// 		biglog(score, 'magenta')
-// 		rl.prompt();
-// 	}else{
-// 		let id_0 =Math.floor( Math.random() * n_preguntas);
-		
-// 		do{
-// 		id = id_0;  //Cogemos un id al azar
-// 		let quiz = model.getByIndex(id); //Sacamos el quiz de dicho id
-// 		delete toBeResolved[id] //la quitamos del array
-		
-// 		rl.question(` ${colorize(quiz.question, 'red')}${colorize('?', 'red')} `, resp => {
-// 			if( resp.toLowerCase().trim() === quiz.answer.toLowerCase().trim() ){
-// 				score++;
-// 				n_preguntas--;
-// 				log(`CORRECTO - Lleva  : ${score} aciertos` );
-// 				playOne();
-// 				}
-
-// 			else{ 
-// 				log('INCORRECTO ');
-// 				log('Fin del examen. Aciertos: ');
-// 				biglog(score, 'magenta');
-// 				rl.prompt();
-// 				}
-// 			});
-
-// 		}while ( id_0 != id);
-// 		}
-// 	}
-// 	playOne();
 
 
 /**
@@ -314,7 +246,7 @@ exports.deleteCmd = (socket,rl, id) =>{
 	validateId(id)
 	.then(id => models.quiz.destroy({where: {id}}))
 	.catch(error => {
-		errorlog(socket,error.message);
+		errorlog(error.message);
 	})
 	.then(() => {
 		rl.prompt();
@@ -325,7 +257,7 @@ exports.deleteCmd = (socket,rl, id) =>{
 *Edita el quiz indicado
 *@param id Identificador del quiz 
 */
-exports.editCmd = (socket,rl, id) =>{
+exports.editCmd = (socket, rl, id) =>{
 
 	validateId(id)
 	.then(id => models.quiz.findById(id))

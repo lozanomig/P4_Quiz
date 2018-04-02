@@ -1,7 +1,7 @@
 
 const figlet = require('figlet');
 const chalk = require('chalk');
-//const net= require("net");
+const net= require("net");
 
 
 //Dar color a un string
@@ -14,7 +14,7 @@ const colorize = (msg, color) => {
 
 //Escribe un mensaje de log
 const log = (socket, msg , color) => {
-	socket.write(colorize( msg , color)+"\n");
+	socket.write(`${colorize( msg , color)} \n`);
 };
 
 //Escribe un mensaje de log grande
