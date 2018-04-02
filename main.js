@@ -2,15 +2,21 @@ const readline = require('readline');
 const model = require('./model');
 const {log, biglog, errorlog, colorize} = require("./out");
 const cmds = require('./cmds');
+const net= require("net");
+//socket= new net.Socket([null,false,true,true]);
 
+net.createServer(socket =>  {
+
+
+console.log("Se a creado un cliente"+ socket.remoteAddress);	
 //Mensaje inicial
-biglog('CORE Quiz', 'green');
+biglog(socket,'CORE Quiz', 'green');
 
 const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
+  input: socket,
+  output: socket,
   prompt: colorize("quiz> ", 'blue'),
-  completer(line) {
+  completer:(line)=> {
   const completions = 'h help add delete edit list test p play credits q quit'.split(' ');
   const hits = completions.filter((c) => c.startsWith(line));
   // show all completions if none found
@@ -18,7 +24,9 @@ const rl = readline.createInterface({
 }
 
 });
-
+socket
+.on("end", ()=>{rl.close();})
+.on("error", ()=>{rl.close();});
 rl.prompt();
 
 rl
@@ -33,41 +41,41 @@ rl
 	  		break;
 	  	case 'h':	
 	  	case 'help':
-	  		cmds.helpCmd(rl);
+	  		cmds.helpCmd(socket,rl);
 		    break;	
 		    	   
 		case 'q':
 		case 'quit':
-	    	cmds.quitCmd(rl);
+	    	cmds.quitCmd(socket,rl);
 	    	break;   
 	    case 'add':
-	    	cmds.addCmd(rl);
+	    	cmds.addCmd(socket,rl);
 	    	break;
 	    case 'list':
-	    	cmds.listCmd(rl);
+	    	cmds.listCmd(socket,rl);
 	    	break;
 	    case 'show':
-	    	cmds.showCmd(rl, args[1]);
+	    	cmds.showCmd(socket,rl, args[1]);
 	    	break;	
 	    case 'test':
-	    	cmds.testCmd(rl, args[1]);
+	    	cmds.testCmd(socket,rl, args[1]);
 	    	break;
 	    case 'play':
 	    case 'p':
-	    	cmds.playCmd(rl);
+	    	cmds.playCmd(socket,rl);
 	    	break;
 	    case 'delete':
-	    	cmds.deleteCmd(rl, args[1]);
+	    	cmds.deleteCmd(socket,rl, args[1]);
 	    	break;
 	    case 'edit':
-	    	cmds.editCmd(rl, args[1]);
+	    	cmds.editCmd(socket,rl, args[1]);
 	    	break;
 	    case 'credits':
-	    	cmds.creditsCmd(rl);
+	    	cmds.creditsCmd(socket,rl);
 	    	break;
 	    default:
-		    log(`Comando desconocido: '${colorize(cmd, 'red')}'`); 
-		    log(`Use ${colorize('help o h', 'green')} para ver los comandos disponibles.`);
+		    log(socket,`Comando desconocido: '${colorize(cmd, 'red')}'`); 
+		    log(socket,`Use ${colorize('help o h', 'green')} para ver los comandos disponibles.`);
 		    rl.prompt();
 		    break;
 	  }
@@ -76,6 +84,11 @@ rl
 
 .on('close', () => {
   log('Adios');
-  process.exit(0);
+ // process.exit(0);
 });
+
+
+})
+.listen(3030);
+
 
